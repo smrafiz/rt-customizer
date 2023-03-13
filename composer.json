@@ -1,0 +1,15 @@
+{
+  "name": "rt/customizer",
+  "authors": [
+    {
+      "name": "RadiusTheme",
+      "email": "s.m.rafiz@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "RT\\Customizer\\": "inc"
+    }
+  },
+  "description": "A simple customizer framework."
+}
