@@ -1,2 +1,2 @@
-# rt-customizer
+# RT Customizer
 A Simple Customizer Framework.
