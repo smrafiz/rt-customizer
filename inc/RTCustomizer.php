@@ -6,6 +6,7 @@
  */
 
 use RT\Customizer\Helpers as Helpers;
+use RT\Customizer\Traits\SingletonTrait;
 use RT\Customizer\Controllers as Controllers;
 
 // Do not allow directly accessing this file.
@@ -13,15 +14,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'This script cannot be accessed directly.' );
 }
 
-require_once __DIR__ . './../vendor/autoload.php';
-
 if ( ! class_exists( RTCustomizer::class ) ) {
 	/**
 	 * Main initialization class.
 	 */
 	final class RTCustomizer {
 
-		use RT\Customizer\Traits\SingletonTrait;
+		use SingletonTrait;
 
 		/**
 		 * Options.
@@ -69,7 +68,10 @@ if ( ! class_exists( RTCustomizer::class ) ) {
 		public function initialize() {
 			\do_action( 'rt_customizer_init' );
 
+			// Text Domain.
 			$this->i18n();
+
+			// Controller Init.
 			Helpers\Fns::instances( $this->controllers() );
 		}
 
@@ -90,16 +92,16 @@ if ( ! class_exists( RTCustomizer::class ) ) {
 		public function controllers() {
 			$controllers = [];
 
-			if ( is_admin() ) {
-				$controllers[] = Controllers\AdminController::class;
-			}
-
-			$controllers[] = Controllers\PostTypesController::class;
-			$controllers[] = Controllers\ScriptsController::class;
-			$controllers[] = Controllers\AjaxController::class;
-			$controllers[] = Controllers\WidgetsController::class;
-			$controllers[] = Controllers\FrontendController::class;
-			$controllers[] = Controllers\GutenbergController::class;
+//			if ( is_admin() ) {
+//				$controllers[] = Controllers\AdminController::class;
+//			}
+//
+//			$controllers[] = Controllers\PostTypesController::class;
+//			$controllers[] = Controllers\ScriptsController::class;
+//			$controllers[] = Controllers\AjaxController::class;
+//			$controllers[] = Controllers\WidgetsController::class;
+//			$controllers[] = Controllers\FrontendController::class;
+//			$controllers[] = Controllers\GutenbergController::class;
 
 			return $controllers;
 		}
@@ -120,15 +122,6 @@ if ( ! class_exists( RTCustomizer::class ) ) {
 		 */
 		public function pluginPath() {
 			return untrailingslashit( plugin_dir_path( TLP_CUSTOMIZER_PLUGIN_PATH ) );
-		}
-
-		/**
-		 * Checks if WooCommerce installed
-		 *
-		 * @return boolean
-		 */
-		public function isWcActive() {
-			return class_exists( 'WooCommerce' );
 		}
 
 		/**

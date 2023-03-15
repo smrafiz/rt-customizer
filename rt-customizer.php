@@ -37,23 +37,24 @@ if ( ! class_exists( RTCustomizer::class ) ) {
 	require_once 'inc/RTCustomizer.php';
 }
 
-register_activation_hook( __FILE__, 'activate_rt_customizer' );
 /**
- * Plugin activation action.
+ * Plugin activation/deactivation action.
  *
  * Plugin activation will not work after "plugins_loaded" hook
  * that's why activation hooks run here.
+ */
+register_activation_hook( __FILE__, 'activate_rt_customizer' );
+register_deactivation_hook( __FILE__, 'deactivate_rt_customizer' );
+
+/**
+ * Plugin activation action.
  */
 function activate_rt_customizer() {
 	\RT\Customizer\Helpers\Install::activate();
 }
 
-register_deactivation_hook( __FILE__, 'deactivate_rt_customizer' );
 /**
  * Plugin deactivation action.
- *
- * Plugin deactivation will not work after "plugins_loaded" hook
- * that's why deactivation hooks run here.
  */
 function deactivate_rt_customizer() {
 	\RT\Customizer\Helpers\Install::deactivate();
